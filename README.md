@@ -20,6 +20,13 @@ $ cat tex-env.nix
 })
 ```
 
+tex2nix does not follow `\input` or `\include`. However you can specify multiple
+texfiles as input
+
+```console
+$ tex2nix *.tex
+```
+
 The resulting expression can be imported like this to in your document directory:
 
 ```nix
