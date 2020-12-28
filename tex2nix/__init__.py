@@ -11,7 +11,18 @@ from typing import Set, Iterable
 
 def get_nix_packages() -> Set[str]:
     res = subprocess.run(
-        ["nix", "eval", "--json", "nixpkgs#texlive", "--apply", "builtins.attrNames"],
+        [
+            "nix",
+            "--experimental-features",
+            "nix-command",
+            "eval",
+            "--json",
+            "-f",
+            "<nixpkgs>",
+            "texlive",
+            "--apply",
+            "builtins.attrNames",
+        ],
         check=True,
         text=True,
         stdout=subprocess.PIPE,
