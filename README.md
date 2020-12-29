@@ -3,6 +3,27 @@
 Generate Texlive environment containing all dependencies for your document
 rather than downloading gigabytes of texlive packages.
 
+## Installation
+
+With stable nix you can do:
+
+``` console
+nix-build && ./result/bin/tex2nix
+```
+
+If you use flakes put the following in your inputs
+
+```nix
+nixpkgs.url = "github:Mic92/tex2nix";
+nixpkgs.inputs.utils.follows = "nixpkgs";
+```
+
+or just do:
+
+```console
+$ nix run github:Mic92/tex2nix
+```
+
 
 ## USAGE
 
