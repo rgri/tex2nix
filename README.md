@@ -11,6 +11,8 @@ With stable nix you can do:
 nix-build && ./result/bin/tex2nix
 ```
 
+(requires [experimental Nix feature 'nix-command'](https://nixos.wiki/wiki/Nix_command))
+
 If you use flakes put the following in your inputs
 
 ```nix
