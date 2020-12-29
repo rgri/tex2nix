@@ -14,8 +14,10 @@ nix-build && ./result/bin/tex2nix
 If you use flakes put the following in your inputs
 
 ```nix
-nixpkgs.url = "github:Mic92/tex2nix";
-nixpkgs.inputs.utils.follows = "nixpkgs";
+{
+  inputs.nixpkgs.url = "github:Mic92/tex2nix";
+  inputs.nixpkgs.inputs.utils.follows = "nixpkgs";
+}
 ```
 
 or just do:
