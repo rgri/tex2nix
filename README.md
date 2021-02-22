@@ -15,8 +15,8 @@ If you use flakes put the following in your inputs
 
 ```nix
 {
-  inputs.nixpkgs.url = "github:Mic92/tex2nix";
-  inputs.nixpkgs.inputs.utils.follows = "nixpkgs";
+  inputs.tex2nix.url = "github:Mic92/tex2nix";
+  inputs.tex2nix.inputs.utils.follows = "nixpkgs";
 }
 ```
 
