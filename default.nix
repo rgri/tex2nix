@@ -1,12 +1,14 @@
-{ pkgs ?  import <nixpkgs> {},
-  src ? ./.
+{ pkgs ?  import <nixpkgs> {}
+, pkgsSrc ? ./.
 }:
 
 
 with pkgs;
 python3.pkgs.buildPythonApplication rec {
   name = "tex2nix";
-  inherit src;
+
+  src = pkgsSrc;
+
   buildInputs = [ makeWrapper ];
   checkInputs = [
     python3.pkgs.black

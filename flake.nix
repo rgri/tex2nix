@@ -9,7 +9,7 @@
       let pkgs = nixpkgs.legacyPackages.${system}; in
       rec {
         packages.tex2nix = pkgs.callPackage ./default.nix {
-          src = self;
+          pkgsSrc = self;
         };
         defaultPackage = packages.tex2nix;
       });
