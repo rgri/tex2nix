@@ -73,8 +73,8 @@ def write_tex_env(dir: str, packages: Set[str]) -> str:
     with open(name, "w") as f:
         f.write(
             """# Generated with tex2nix 0.0.0
-{ texlive }:
-(texlive.combine {
+{ texlive, extraTexPackages ? {} }:
+(texlive.combine ({
     inherit (texlive) scheme-small;
 """
         )
@@ -82,7 +82,7 @@ def write_tex_env(dir: str, packages: Set[str]) -> str:
             f.write(f'    "{package}" = texlive."{package}";\n')
         f.write(
             """
-})
+} // extraTexPackages))
 """
         )
     print("wrote tex-env.nix...")

@@ -66,3 +66,16 @@ nix-shell> pdflatex --version
 pdfTeX 3.14159265-2.6-1.40.21 (TeX Live 2020/NixOS.org)
 ...
 ```
+
+To add additional packages you can use the extraTexPackages field:
+
+```nix
+with import <nixpkgs> {};
+mkShell {
+  buildInputs = [ (pkgs.callPackage ./tex-env.nix {
+    extraTexPackages = {
+      inherit (texlive) latexmk;
+    };
+  }) ];
+}
+```
