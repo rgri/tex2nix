@@ -27,6 +27,6 @@ python3.pkgs.buildPythonApplication rec {
     mypy --strict tex2nix
   '';
   makeWrapperArgs = [
-    "--prefix PATH" ":" (lib.makeBinPath [ nixFlakes ])
+    "--prefix PATH" ":" (lib.makeBinPath [ nixVersions.stable ])
   ];
 }
