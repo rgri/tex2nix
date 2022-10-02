@@ -29,4 +29,4 @@ python3.pkgs.buildPythonApplication rec {
   makeWrapperArgs = [
     "--prefix PATH" ":" (lib.makeBinPath [ nixVersions.stable ])
   ];
-}nixVersions.stable
+}
