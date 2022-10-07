@@ -4,6 +4,10 @@
 
 
 with pkgs;
+
+let
+  nixFlakes = nixVersions.stable;
+in
 python3.pkgs.buildPythonApplication rec {
   name = "tex2nix";
 
