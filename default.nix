@@ -16,7 +16,7 @@ python3.pkgs.buildPythonApplication rec {
     glibcLocales
     mypy
     # technically not a test input, but we need it for development in PATH
-    nixFlakes
+    nixVersions.stable
   ];
   checkPhase = ''
     echo -e "\x1b[32m## run black\x1b[0m"
@@ -27,6 +27,6 @@ python3.pkgs.buildPythonApplication rec {
     mypy --strict tex2nix
   '';
   makeWrapperArgs = [
-    "--prefix PATH" ":" (lib.makeBinPath [ nixFlakes ])
+    "--prefix PATH" ":" (lib.makeBinPath [ nixVersions.stable ])
   ];
 }
