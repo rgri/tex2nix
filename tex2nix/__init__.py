@@ -78,7 +78,7 @@ def write_tex_env(dir: str, packages: Set[str]) -> str:
     inherit (texlive) scheme-small;
 """
         )
-        for package in packages:
+        for package in sorted(packages):
             f.write(f'    "{package}" = texlive."{package}";\n')
         f.write(
             """
