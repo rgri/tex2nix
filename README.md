@@ -1,5 +1,7 @@
 # tex2nix
 
+**Project is looking for a new maintainer: I am no longer using LaTeX and I am ready to transfer the project to something else**
+
 Generate Texlive environment containing all dependencies for your document
 rather than downloading gigabytes of texlive packages.
 
