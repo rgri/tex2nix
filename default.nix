@@ -2,7 +2,6 @@
 , pkgsSrc ? ./.
 }:
 
-
 with pkgs;
 python3.pkgs.buildPythonApplication rec {
   name = "tex2nix";
@@ -10,7 +9,7 @@ python3.pkgs.buildPythonApplication rec {
   src = pkgsSrc;
 
   buildInputs = [ makeWrapper ];
-  checkInputs = [
+  nativeCheckInputs = [
     python3.pkgs.black
     python3.pkgs.flake8
     glibcLocales
