@@ -1,9 +1,8 @@
 # tex2nix
 
-**Project is looking for a new maintainer: I am no longer using LaTeX and I am ready to transfer the project to something else**
-
 Generate Texlive environment containing all dependencies for your document
 rather than downloading gigabytes of texlive packages.
+
 
 ## Installation
 
@@ -81,3 +80,7 @@ mkShell {
   }) ];
 }
 ```
+
+# Project history
+
+tex2nix was originally written by [Mic92](https://github.com/Mic92). Since 2023, [rgri](https://github.com/rgri) is the new maintainer.
