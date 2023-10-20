@@ -1,0 +1,126 @@
+\documentclass{article}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{latexsym}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{cd}
+\usepackage{xfrac}
+\usepackage{enumitem}
+\usepackage[margin=1.0in]{geometry}
+\pagestyle{empty}
+\newcommand{\del}{\partial}
+\newcommand{\im}{\text{im}}
+\newcommand{\coker}{\text{coker}}
+\newcommand{\id}{\text{id}}
+\input{input}
+
+
+\title{Communtative Diagram examples}
+
+
+\begin{document}
+	
+	\maketitle
+	
+\subsection*{Square:}
+\begin{equation*}
+\begin{tikzcd}
+A \arrow[r,"\alpha"] \arrow[d,"\gamma"] & B \arrow[d,"\delta"] \\
+C \arrow[r,"\beta"] & D
+\end{tikzcd}
+\end{equation*}
+
+\subsection*{Triangle:}
+\begin{equation*}
+\begin{tikzcd}
+ & A \arrow[ld, "\alpha"] \arrow[d,"\beta"] \\
+ B  & C \arrow[l,"\gamma"]
+\end{tikzcd}
+\end{equation*}
+
+\subsection*{Chain Complex}
+\begin{equation*}
+\begin{tikzcd}
+... \arrow[r] & M' \arrow[r,"f'"] & M \arrow[r,"f"] & M'' \arrow[r] & ...
+\end{tikzcd}
+\end{equation*}
+
+\subsection*{Ladder:}
+\begin{equation*}
+\begin{tikzcd}
+...  \arrow[r] & H_n(Y\cap Z)  \arrow[r] \arrow[d,"\cong"] & H_n(Y) \arrow[r] \arrow[d,"\cong"] & H_n(Y,Y\cap Z) \arrow[r] \arrow[d,"f"] & H_{n-1}(Y \cap Z) \arrow[r] \arrow[d,"\cong"] & H_{n-1}(Y) \arrow[r] \arrow [d,"\cong"] & ...\\	
+...  \arrow[r] & H_n(A\cap B)  \arrow[r] \arrow[d,"\cong"] & H_n(A) \arrow[r] \arrow[d,"\cong"] & H_n(A,A\cap B) \arrow[r] \arrow[d,"\cong"] &
+H_{n-1}(A\cap B) \arrow[r] \arrow[d,"\cong"] & H_{n-1}(A) \arrow[r] \arrow [d,"\cong"] & ...\\	
+...  \arrow[r] & H_n(B)  \arrow[r] \arrow[d,"\cong"] & H_n(X) \arrow[r] \arrow[d,"\cong"] & H_n(X,B) \arrow[r] \arrow[d,"h"] & H_{n-1}(B) \arrow[r] \arrow[d,"\cong"] & H_{n-1}(X) \arrow[r] \arrow [d,"\cong"] & ...\\
+...  \arrow[r] & H_n(Z)  \arrow[r] & H_n(X) \arrow[r] & H_n(X,Z) \arrow[r] & H_{n-1}(Z) \arrow[r] & H_{n-1}(X) \arrow[r] & ...
+\end{tikzcd}
+\end{equation*}
+
+\subsection*{Pushout:}
+\begin{equation*}
+\begin{tikzcd}
+ X \arrow[r,"\pi_1"] \arrow[d,"\pi_2"] & X_1 \arrow[d,"i_1"] \arrow[ddr,bend left, "f_1"]\\
+ X_2 \arrow[r,"i_2"] \arrow[drr,bend right, "f_2"] & P \arrow[dr, dashed, "\exists! f"]\\
+  & & Q
+\end{tikzcd}
+\end{equation*}
+
+\subsection*{Pullback:}
+\begin{equation*}
+\begin{tikzcd}
+ Q \arrow[drr, bend left, "f_1"] \arrow[ddr, bend right, "f_2"] \arrow[dr, dashed, "\exists! f"]& & \\
+ & P \arrow[d,"i_2"] \arrow[r,"i_1"] & X_1 \arrow[d,"\pi_1"] \\
+ & X_2 \arrow[r,"\pi_2"] & X
+\end{tikzcd}
+\end{equation*}
+
+\subsection*{More Bending:}
+
+$$
+\begin{tikzcd}[column sep=tiny]
+& \pi_1(U_1) \arrow[dr] \arrow[drr, "j_1", bend left=20]
+&
+&[1.5em] \\
+\pi_1(U_1\cap U_2) \arrow[ur, "i_1"] \arrow[dr, "i_2"']
+&
+& \pi_1(U_1) \ast_{ \pi_1(U_1\cap U_2)} \pi_1(U_2) \arrow[r, dashed, "\simeq"]
+& \pi_1(X) \\
+& \pi_1(U_2) \arrow[ur]\arrow[urr, "j_2"', bend right=20]
+&
+&
+\end{tikzcd}
+$$
+
+\subsection*{Product Diagram}
+$$
+\begin{tikzcd}
+& Y \arrow[rddd,bend left,"f_2"] \arrow[lddd,bend right, "f_1"] \arrow[dd,dashed ,"f_2"]  & \\
+& & \\
+ & A\times B \arrow[ld,"\pi_1"] \arrow[rd,"\pi_2"] & \\
+ A & & B
+\end{tikzcd}
+$$
+
+\subsection*{Crossing over:}
+$$
+\begin{tikzcd}
+A \arrow[rd] & B \arrow[ld,crossing over] \\
+C & D
+\end{tikzcd}
+$$
+
+\subsection*{3d cube:}
+
+$$
+\begin{tikzcd}
+& f^* E_V \arrow[dl] \arrow[rr] \arrow[dd] & & E_V \arrow[dl] \arrow[dd] \\
+f^* E \arrow[rr, crossing over] \arrow[dd] & & E \\
+& U \arrow[dl] \arrow[rr] & & V \arrow[dl] \\
+M \arrow[rr] & & N \arrow[from=uu, crossing over]\\
+\end{tikzcd}
+$$
+
+
+\end{document}
