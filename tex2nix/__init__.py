@@ -15,7 +15,8 @@ def get_nix_packages() -> Set[str]:
         [
             "nix",
             "--experimental-features",
-            "nix-command",
+            # REVIEW: Is this necessary?
+            "nix-command flakes",
             "eval",
             "--json",
             "-f",
