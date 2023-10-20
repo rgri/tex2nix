@@ -31,26 +31,15 @@ def get_nix_packages() -> Set[str]:
     return set(json.loads(res.stdout))
 
 
-def get_input_lines(arg: str) -> Any:
-    # make this function return the filePath - original .tex + arg + .tex
-    return open(filePath)
-
-
 def get_packages(line: str) -> Set[str]:
-    match = re.match(r"\\(?:usepackage|RequirePackage|(input)).*{([^}]+)}", line)
+    match = re.match(r"\\(?:usepackage|RequirePackage).*{([^}]+)}", line)
     if not match:
         return set()
-    isInput = match.group(1)
-    args = match.group(2)
+    args = match.group(1)
     packages = set()
-    if isInput:
-        for arg in args.split(","):
-            for line in get_input_lines(arg):
-                packages |= get_packages(line)
-    else:
-        for arg in args.split(","):
-            packages.add(arg.strip())
-        return packages
+    for arg in args.split(","):
+        packages.add(arg.strip())
+    return packages
 
 
 with open("/home/shortcut/git/tex2nix/base.tex") as myTex:
