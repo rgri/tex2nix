@@ -30,15 +30,31 @@ def get_nix_packages() -> Set[str]:
     return set(json.loads(res.stdout))
 
 
+def get_input_lines(arg: str) -> Any:
+    # make this function return the filePath - original .tex + arg + .tex
+    return open(filePath)
+
+
 def get_packages(line: str) -> Set[str]:
-    match = re.match(r"\\(?:usepackage|RequirePackage).*{([^}]+)}", line)
+    match = re.match(r"\\(?:usepackage|RequirePackage|(input)).*{([^}]+)}", line)
     if not match:
         return set()
-    args = match.group(1)
+    isInput = match.group(1)
+    args = match.group(2)
     packages = set()
-    for arg in args.split(","):
-        packages.add(arg.strip())
-    return packages
+    if isInput:
+        for arg in args.split(","):
+            for line in get_input_lines(arg):
+                packages |= get_packages(line)
+    else:
+        for arg in args.split(","):
+            packages.add(arg.strip())
+        return packages
+
+
+with open("/home/shortcut/git/tex2nix/base.tex") as myTex:
+    for line in myTex:
+        get_packages(line)
 
 
 def _collect_deps(
@@ -101,6 +117,8 @@ def extract_dependencies(lines: Iterable[str]) -> Set[str]:
 
 def main() -> None:
     packages = extract_dependencies(fileinput.input())
+    global filePath
+    filePath = os.path.abspath(fileinput.filename())
     write_tex_env(os.getcwd(), packages)
 
 
