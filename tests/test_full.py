@@ -2,6 +2,7 @@
 
 import tempfile
 import subprocess
+from pathlib import Path
 
 from tex2nix import extract_dependencies, write_tex_env
 
@@ -15,7 +16,8 @@ def test_document() -> None:
 \\end{document}
     """.split(
             "\n"
-        )
+        ),
+        inputSrc=Path(""),
     )
     assert deps == set(["varwidth", "tabu"])
 
