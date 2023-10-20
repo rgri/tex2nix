@@ -5,6 +5,7 @@ import fileinput
 import subprocess
 import json
 import os
+from pathlib import Path
 
 from typing import Set, Iterable
 
@@ -105,10 +106,32 @@ def write_tex_env(dir: str, packages: Set[str]) -> str:
     return name
 
 
-def extract_dependencies(lines: Iterable[str]) -> Set[str]:
-    packages = set()
+# REVIEW: No errors, but the types don't seem right
+def extract_tex_dependencies(lines: Iterable[str], inputSrc: Path) -> Set[Path]:
+    tex_dependencies = set()
     for line in lines:
-        packages |= get_packages(line)
+        match = re.match(r"\\input.*{([^}]+)}", line)
+        if match:
+            args = match.group(1)
+            for arg in args.split(","):
+                # REVIEW: Add check for circular depencencies?
+                # Assumes inputs are of the form: \input{FILENAME}, corresponding to {inputSrc}/FILENAME.tex
+                argPath = inputSrc / f"{arg}.tex"
+                tex_dependencies.add(argPath)
+                tex_dependencies |= extract_tex_dependencies(open(argPath), inputSrc)
+    return tex_dependencies
+
+
+def extract_dependencies(lines: Iterable[str], inputSrc: Path) -> Set[str]:
+    # Building set of all \input .tex files
+    packages = set()
+    linesPersist = [x for x in map(str, lines)]
+    tex_dependencies = extract_tex_dependencies(list(linesPersist), inputSrc)
+    for dependency in tex_dependencies:
+        for x in open(dependency):
+            packages |= get_packages(x)
+    for y in list(linesPersist):
+        packages |= get_packages(y)
 
     all_packages = get_nix_packages()
     nix_packages = packages & all_packages
@@ -116,9 +139,11 @@ def extract_dependencies(lines: Iterable[str]) -> Set[str]:
 
 
 def main() -> None:
-    packages = extract_dependencies(fileinput.input())
-    global filePath
-    filePath = os.path.abspath(fileinput.filename())
+    with fileinput.input() as f:
+        # REVIEW: Does this pop the first line of f?
+        f.readline()
+        inputSrc = Path(f.filename()).parent.absolute()
+        packages = extract_dependencies(f, inputSrc)
     write_tex_env(os.getcwd(), packages)
 
 
