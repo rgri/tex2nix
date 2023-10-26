@@ -16,7 +16,7 @@ If you use flakes put the following in your inputs
 
 ```nix
 {
-  inputs.tex2nix.url = "github:Mic92/tex2nix";
+  inputs.tex2nix.url = "github:rgri/tex2nix";
   inputs.tex2nix.inputs.utils.follows = "nixpkgs";
 }
 ```
@@ -24,7 +24,7 @@ If you use flakes put the following in your inputs
 or just do:
 
 ```console
-$ nix run github:Mic92/tex2nix
+$ nix run github:rgri/tex2nix
 ```
 
 
