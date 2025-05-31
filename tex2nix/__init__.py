@@ -31,7 +31,7 @@ def get_nix_packages() -> Set[str]:
 
 
 def get_packages(line: str) -> Set[str]:
-    match = re.match(r"\\(?:usepackage|RequirePackage).*{([^}]+)}", line)
+    match = re.match(r"\s*\\(?:usepackage|RequirePackage).*{([^}]+)}", line)
     if not match:
         return set()
     args = match.group(1)
